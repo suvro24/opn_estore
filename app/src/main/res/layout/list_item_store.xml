@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/store_icon"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:text="@{store.title}"
+            android:text="@{store.name}"
             tools:text="Coffee Store"/>
 
         <TextView
@@ -53,5 +53,7 @@
             android:textAppearance="?attr/textAppearanceListItemSecondary"
             android:text="@{store.rating.toString()}"
             tools:text="Rating: 4.5"/>
+
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

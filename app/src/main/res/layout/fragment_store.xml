@@ -24,11 +24,10 @@
             android:paddingStart="@dimen/store_item_side_margin"
             android:paddingTop="@dimen/parent_list_top_margin"
             android:paddingEnd="@dimen/store_item_side_margin"
-            app:items="@{vm.parentListItems}"
+            app:setItems="@{vm.parentListItems}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:spanCount="2"
-            tools:listitem="@layout/list_item_store"
-            android:background="@color/cardview_dark_background"/>
+            tools:listitem="@layout/list_item_store"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

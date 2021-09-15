@@ -3,4 +3,6 @@
     <string name="title_store">eStore</string>
     <string name="title_order_summary">Order Summary</string>
     <string name="title_order_success">Order Success</string>
+
+    <string name="btn_add_text">ADD</string>
 </resources>

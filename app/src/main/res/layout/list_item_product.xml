@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener"/>
+            name="addListener"
+            type="com.saiful.opn_estore.adapter.ParentListAdapter.OnAddProductClickListener"/>
         <variable
             name="product"
             type="com.saiful.opn_estore.data.model.Product"/>
@@ -33,7 +33,7 @@
             tools:text="C"/>
 
         <TextView
-            android:id="@+id/store_title"
+            android:id="@+id/product_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -44,14 +44,26 @@
             tools:text="Coffee Store"/>
 
         <TextView
-            android:id="@+id/store_rating"
+            android:id="@+id/product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/store_title"
+            app:layout_constraintTop_toBottomOf="@id/product_title"
             android:textAppearance="?attr/textAppearanceListItemSecondary"
             android:text="@{product.price.toString()}"
-            tools:text="Rating: 4.5"/>
+            tools:text="50"/>
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_add_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_icon"
+            tools:layout_editor_absoluteX="286dp"
+            tools:layout_editor_absoluteY="69dp"
+            android:onClick="@{() ->  addListener.onAddProduct(product)}"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

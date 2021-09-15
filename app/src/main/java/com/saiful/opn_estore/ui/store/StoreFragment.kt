@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.saiful.opn_estore.adapter.ParentListAdapter
+import com.saiful.opn_estore.data.model.ParentListItemModel
+import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.databinding.FragmentStoreBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StoreFragment : Fragment() {
+class StoreFragment : Fragment(), ParentListAdapter.OnAddProductClickListener {
 
     private val viewModel: StoreViewModel by viewModels()
 
@@ -27,22 +29,34 @@ class StoreFragment : Fragment() {
     ): View {
 
         _binding = FragmentStoreBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner =  viewLifecycleOwner
+            lifecycleOwner = viewLifecycleOwner
             vm = viewModel
         }
-        val adapter = ParentListAdapter()
-        binding.parentList.adapter = adapter
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter = ParentListAdapter(this)
+        binding.parentList.adapter = adapter
+
+        viewModel.parentListItems.observe(viewLifecycleOwner) {
+            it.forEach { item ->
+                println(item)
+            }
+        }
+
+        viewModel.fetchStoreAndProduct()
+
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onAddProduct(item: Product) {
+        Toast.makeText(context, "Item Added", Toast.LENGTH_SHORT).show()
     }
 }

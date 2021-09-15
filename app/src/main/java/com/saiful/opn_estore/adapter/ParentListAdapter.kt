@@ -13,7 +13,7 @@ import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.databinding.ListItemProductBinding
 import com.saiful.opn_estore.databinding.ListItemStoreBinding
 
-class ParentListAdapter :
+class ParentListAdapter(private val addItemListener: OnAddProductClickListener) :
     ListAdapter<ParentListItemModel, RecyclerView.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -39,7 +39,7 @@ class ParentListAdapter :
 
             is ParentViewHolder.StoreViewHolder -> holder.bind(getItem(position) as Store)
 
-            is ParentViewHolder.ProductViewHolder -> holder.bind(getItem(position) as Product)
+            is ParentViewHolder.ProductViewHolder -> holder.bind(getItem(position) as Product, addItemListener)
         }
     }
 
@@ -47,6 +47,7 @@ class ParentListAdapter :
         return when (getItem(position)) {
             is Store -> R.layout.list_item_store
             is Product -> R.layout.list_item_product
+            else -> throw IllegalArgumentException("Invalid View Type")
         }
     }
 
@@ -66,14 +67,19 @@ class ParentListAdapter :
 
         class ProductViewHolder(private val binding: ListItemProductBinding) :
             ParentViewHolder(binding) {
-            fun bind(item: Product) {
+            fun bind(item: Product, addItemListener: OnAddProductClickListener) {
                 binding.apply {
                     product = item
+                    addListener = addItemListener
                     executePendingBindings()
                 }
             }
         }
 
+    }
+
+    interface OnAddProductClickListener{
+        fun onAddProduct(item: Product)
     }
 }
 
@@ -85,7 +91,7 @@ private class DiffCallback : DiffUtil.ItemCallback<ParentListItemModel>() {
         newItem: ParentListItemModel
     ): Boolean {
         return when {
-            oldItem is Store && newItem is Store -> oldItem.title == newItem.title
+            oldItem is Store && newItem is Store -> oldItem.name == newItem.name
 
             oldItem is Product && newItem is Product -> oldItem.name == newItem.name
 
