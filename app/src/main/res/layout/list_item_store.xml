@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="store"
+            type="com.saiful.opn_estore.data.model.Store"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        android:layout_marginStart="@dimen/store_item_side_margin"
+        android:layout_marginEnd="@dimen/store_item_side_margin"
+        android:layout_marginBottom="@dimen/store_item_side_margin">
+
+        <TextView
+            android:id="@+id/store_icon"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/store_icon_height"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="?attr/textAppearanceHeadline2"
+            tools:text="C"/>
+
+        <TextView
+            android:id="@+id/store_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_icon"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:text="@{store.title}"
+            tools:text="Coffee Store"/>
+
+        <TextView
+            android:id="@+id/store_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_title"
+            android:textAppearance="?attr/textAppearanceListItemSecondary"
+            android:text="@{store.rating.toString()}"
+            tools:text="Rating: 4.5"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
