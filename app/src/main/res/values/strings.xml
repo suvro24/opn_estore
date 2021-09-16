@@ -5,4 +5,7 @@
     <string name="title_order_success">Order Success</string>
 
     <string name="btn_add_text">ADD</string>
+    <string name="store_open_time">Opening time: %1$s</string>
+    <string name="store_close_time">Closing time %1$s</string>
+    <string name="product_price">฿%1$d</string>
 </resources>

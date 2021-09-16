@@ -13,7 +13,7 @@ import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.databinding.ListItemProductBinding
 import com.saiful.opn_estore.databinding.ListItemStoreBinding
 
-class ParentListAdapter(private val addItemListener: OnAddProductClickListener) :
+class ParentListAdapter(private val addRemoveItemListener: OnAddRemoveProductClickListener) :
     ListAdapter<ParentListItemModel, RecyclerView.ViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -39,7 +39,7 @@ class ParentListAdapter(private val addItemListener: OnAddProductClickListener) 
 
             is ParentViewHolder.StoreViewHolder -> holder.bind(getItem(position) as Store)
 
-            is ParentViewHolder.ProductViewHolder -> holder.bind(getItem(position) as Product, addItemListener)
+            is ParentViewHolder.ProductViewHolder -> holder.bind(getItem(position) as Product, addRemoveItemListener)
         }
     }
 
@@ -67,10 +67,10 @@ class ParentListAdapter(private val addItemListener: OnAddProductClickListener) 
 
         class ProductViewHolder(private val binding: ListItemProductBinding) :
             ParentViewHolder(binding) {
-            fun bind(item: Product, addItemListener: OnAddProductClickListener) {
+            fun bind(item: Product, addRemoveItemListener: OnAddRemoveProductClickListener) {
                 binding.apply {
                     product = item
-                    addListener = addItemListener
+                    addRemoveListener = addRemoveItemListener
                     executePendingBindings()
                 }
             }
@@ -78,8 +78,9 @@ class ParentListAdapter(private val addItemListener: OnAddProductClickListener) 
 
     }
 
-    interface OnAddProductClickListener{
+    interface OnAddRemoveProductClickListener{
         fun onAddProduct(item: Product)
+        fun onRemoveProduct(item: Product)
     }
 }
 
@@ -91,9 +92,9 @@ private class DiffCallback : DiffUtil.ItemCallback<ParentListItemModel>() {
         newItem: ParentListItemModel
     ): Boolean {
         return when {
-            oldItem is Store && newItem is Store -> oldItem.name == newItem.name
+            oldItem is Store && newItem is Store -> oldItem == newItem
 
-            oldItem is Product && newItem is Product -> oldItem.name == newItem.name
+            oldItem is Product && newItem is Product -> oldItem == newItem
 
             else -> false
         }

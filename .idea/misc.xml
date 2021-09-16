@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/drawable/ic_add_40.xml" value="0.3328125" />
+        <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.2109375" />
+        <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/drawable/ic_baseline_remove_box_24.xml" value="0.2109375" />
+        <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/drawable/ic_minus_40.xml" value="0.2109375" />
+        <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/drawable/rounded_rectangle.xml" value="0.2109375" />
         <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/layout/activity_main.xml" value="0.41394927536231885" />
         <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/layout/fragment_order_success.xml" value="0.5421875" />
         <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/layout/fragment_order_summary.xml" value="0.5421875" />
         <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/layout/fragment_store.xml" value="0.3234375" />
-        <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/layout/list_item_product.xml" value="0.32708333333333334" />
+        <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/layout/list_item_product.xml" value="0.8320441988950277" />
         <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/layout/list_item_store.xml" value="0.5307971014492754" />
         <entry key="..\:/OPN_Assignment/opn_estore/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1675925925925926" />
       </map>

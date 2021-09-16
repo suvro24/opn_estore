@@ -10,32 +10,31 @@ import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.data.model.Store
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.internal.toImmutableList
 import javax.inject.Inject
 
 @HiltViewModel
 class StoreViewModel @Inject constructor(private val repository: DefaultRepository) : ViewModel() {
 
     private val _storeInfo: MutableLiveData<Store> = MutableLiveData()
-    private val storeInfo: LiveData<Store> = _storeInfo
+    //private val storeInfo: LiveData<Store> = _storeInfo
 
-    private var _productList: MutableLiveData<List<Product>> = MutableLiveData<List<Product>>()
-    private var productList: LiveData<List<Product>> = _productList
+    private val _productList: MutableLiveData<List<Product>> = MutableLiveData<List<Product>>()
+    //private val productList: LiveData<List<Product>> = _productList
 
 
     private val _parentListItems: MediatorLiveData<List<ParentListItemModel>> =
         MediatorLiveData<List<ParentListItemModel>>()
-
-    //private val _parentListItems: MutableLiveData<List<ParentListItemModel>> = MutableLiveData<List<ParentListItemModel>>()
     val parentListItems: LiveData<List<ParentListItemModel>> = _parentListItems
 
 
     init {
-        _parentListItems.addSource(storeInfo) {
-            _parentListItems.value = combineStoreProductData(storeInfo.value, productList.value)
+        _parentListItems.addSource(_storeInfo) {
+            _parentListItems.value = combineStoreProductData(_storeInfo.value, _productList.value)
         }
 
-        _parentListItems.addSource(productList) {
-            _parentListItems.value = combineStoreProductData(storeInfo.value, productList.value)
+        _parentListItems.addSource(_productList) {
+            _parentListItems.value = combineStoreProductData(_storeInfo.value, _productList.value)
         }
 
     }
@@ -50,9 +49,13 @@ class StoreViewModel @Inject constructor(private val repository: DefaultReposito
     }
 
     fun addItem(item: Product) {
+        _productList.value?.find { it.name == item.name }?.addQty()
+        _productList.value = _productList.value?.toList()
+    }
 
-        val selectedItem = _parentListItems.value?.find { it is Product && it.name == item.name }
-
+    fun removeItem(item: Product) {
+        _productList.value?.find { it.name == item.name }?.removeQty()
+        _productList.value = _productList.value?.toList()
     }
 
     private fun onFetchStoreSuccess(store: Store) {

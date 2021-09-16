@@ -7,31 +7,31 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.saiful.opn_estore.adapter.ParentListAdapter
-import com.saiful.opn_estore.data.model.ParentListItemModel
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.databinding.FragmentStoreBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StoreFragment : Fragment(), ParentListAdapter.OnAddProductClickListener {
+class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListener {
 
     private val viewModel: StoreViewModel by viewModels()
 
-    private var _binding: FragmentStoreBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentStoreBinding
+    //private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentStoreBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
+        binding = FragmentStoreBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = this@StoreFragment.viewLifecycleOwner
             vm = viewModel
         }
+
         return binding.root
     }
 
@@ -41,22 +41,18 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddProductClickListener {
         val adapter = ParentListAdapter(this)
         binding.parentList.adapter = adapter
 
-        viewModel.parentListItems.observe(viewLifecycleOwner) {
-            it.forEach { item ->
-                println(item)
-            }
-        }
-
         viewModel.fetchStoreAndProduct()
-
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 
     override fun onAddProduct(item: Product) {
-        Toast.makeText(context, "Item Added", Toast.LENGTH_SHORT).show()
+        viewModel.addItem(item)
+    }
+    override fun onRemoveProduct(item: Product) {
+        viewModel.removeItem(item)
     }
 }
