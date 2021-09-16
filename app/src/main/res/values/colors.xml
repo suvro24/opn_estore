@@ -12,6 +12,7 @@
     <color name="black">#595252</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="red">#C61E1E</color>
     <color name="store_card_background">#BEEDE7F6</color>
     <color name="store_card_text">#280680</color>
     <color name="store_card_sub_text">#232222</color>

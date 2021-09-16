@@ -51,6 +51,18 @@
                     android:textAppearance="?attr/textAppearanceBody1"
                     tools:text="Stores" />
 
+                <TextView
+                    android:id="@+id/store_header_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/padding_medium"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:text="@string/error_store"
+                    android:textColor="@color/red"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    tools:text="Stores"
+                    android:visibility="@{vm.storeInfo==null?View.VISIBLE:View.GONE}"/>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/store_info_card"
                     android:layout_width="match_parent"
@@ -136,6 +148,18 @@
                     android:textAppearance="?attr/textAppearanceBody1"
                     tools:text="Products" />
 
+                <TextView
+                    android:id="@+id/product_header_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/padding_medium"
+                    android:layout_marginTop="@dimen/padding_medium"
+                    android:text="@string/error_products"
+                    tools:text="Stores"
+                    android:textColor="@color/red"
+                    android:visibility="@{vm.productList==null?View.VISIBLE:View.GONE}"
+                    android:textAppearance="?attr/textAppearanceBody2"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/parent_list"
                     android:layout_width="match_parent"
@@ -153,6 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/padding_medium"
                     android:layout_marginVertical="@dimen/padding_small"
+                    app:isGoToOderGone="@{vm.productList}"
                     android:text="@string/title_order_summary" />
 
             </LinearLayout>

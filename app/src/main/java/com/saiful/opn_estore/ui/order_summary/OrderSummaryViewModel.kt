@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.saiful.opn_estore.R
 import com.saiful.opn_estore.data.DefaultRepository
 import com.saiful.opn_estore.data.model.Product
+import com.saiful.opn_estore.repository.Repository
 import com.saiful.opn_estore.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OrderSummaryViewModel @Inject constructor(private val repository: DefaultRepository) :
+class OrderSummaryViewModel @Inject constructor(private val repository: Repository) :
     ViewModel() {
 
     private val _cartProductList: MutableLiveData<List<Product>> = MutableLiveData()

@@ -23,4 +23,7 @@
 
     <string name="order_success">Order Success</string>
     <string name="order_failed">Order Failed</string>
+
+    <string name="error_products">Error occurred while loading Products </string>
+    <string name="error_store">Error occurred while loading Store </string>
 </resources>

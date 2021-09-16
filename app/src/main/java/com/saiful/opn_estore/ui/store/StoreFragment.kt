@@ -11,9 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import com.saiful.opn_estore.R
 import com.saiful.opn_estore.adapter.ParentListAdapter
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.databinding.FragmentStoreBinding
+import com.saiful.opn_estore.ui.order_summary.OrderSummaryFragmentDirections
+import com.saiful.opn_estore.utils.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,7 +50,6 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
         binding.parentList.adapter = adapter
 
         viewModel.isLoading.observe(viewLifecycleOwner){
-            println("isLOADING: $it")
             if(it){
                 binding.progressBar.visibility = View.VISIBLE
                 binding.scrollView.visibility = View.GONE
@@ -55,6 +58,13 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
                 binding.scrollView.visibility = View.VISIBLE
             }
         }
+
+        viewModel.errorProductEvent.observe(viewLifecycleOwner, EventObserver {
+            showSnackBar(R.string.error_products)
+        })
+        viewModel.errorStoreEvent.observe(viewLifecycleOwner, EventObserver {
+            showSnackBar(R.string.error_store)
+        })
         binding.goToOrder.setOnClickListener {
             navigateTo(StoreFragmentDirections.actionStoreScreenToOrderSummaryScreen())
         }
@@ -66,6 +76,12 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
 
     override fun onRemoveProduct(item: Product) {
         viewModel.removeItem(item)
+    }
+
+    private fun showSnackBar(msg:Int){
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).apply {
+            animationMode = Snackbar.ANIMATION_MODE_SLIDE
+        }.show()
     }
 
     private fun navigateTo(action: NavDirections) {

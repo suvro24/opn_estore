@@ -11,10 +11,10 @@ import retrofit2.http.POST
 
 interface SwaggerAPIService {
 
-    @GET("storeInfo")
+    @GET("storeInfos")
     suspend fun fetchStores(): Response<Store>
 
-    @GET("products")
+    @GET("productss")
     suspend fun fetchProducts(): Response<List<Product>>
 
     @POST("order")
