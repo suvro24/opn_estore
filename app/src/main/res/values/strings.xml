@@ -21,7 +21,7 @@
     <string name="loading_text_1">Loading</string>
     <string name="loading_text_2">Placing your order</string>
 
-    <string name="order_success">Order Success</string>
+    <string name="order_success">Order Successful</string>
     <string name="order_failed">Order Failed</string>
 
     <string name="error_products">Error occurred while loading Products </string>

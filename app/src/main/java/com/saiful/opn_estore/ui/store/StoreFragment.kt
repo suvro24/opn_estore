@@ -60,10 +60,10 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
         }
 
         viewModel.errorProductEvent.observe(viewLifecycleOwner, EventObserver {
-            showSnackBar(R.string.error_products)
+            binding.productHeaderError.visibility = View.VISIBLE
         })
         viewModel.errorStoreEvent.observe(viewLifecycleOwner, EventObserver {
-            showSnackBar(R.string.error_store)
+            binding.storeHeaderError.visibility = View.VISIBLE
         })
         binding.goToOrder.setOnClickListener {
             navigateTo(StoreFragmentDirections.actionStoreScreenToOrderSummaryScreen())

@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,17 +44,25 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
         if (storeInfo.value != null && productList.value != null) {
             viewModelScope.launch {
                 _cartList.value = repository.getAllCart()
+                println(_cartList.value?.size)
                 _productList.value = combineProductData(productList.value!!).toList()
                 _isLoading.value = false
             }
             return
         }
         viewModelScope.launch {
-            _cartList.value = repository.getAllCart()
-            repository.getStores().successOrError(::onFetchStoreSuccess, ::onFetchStoreFailed)
-            repository.getProducts()
-                .successOrError(::onFetchProductSuccess, ::onFetchProductFailed)
-            _isLoading.value = false
+            try {
+                _cartList.value = repository.getAllCart()
+                repository.getStores().successOrError(::onFetchStoreSuccess, ::onFetchStoreFailed)
+                repository.getProducts()
+                    .successOrError(::onFetchProductSuccess, ::onFetchProductFailed)
+                _isLoading.value = false
+            } catch (e: Exception) {
+                _isLoading.value = false
+                onFetchStoreFailed(Failure.ParsingError)
+                onFetchProductFailed(Failure.ParsingError)
+            }
+
         }
     }
 
@@ -81,7 +90,7 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
     }
 
     private fun onFetchStoreFailed(failure: Failure) {
-        _errorProductEvent.value = Event(Unit)
+        _errorStoreEvent.value = Event(Unit)
     }
 
     private fun onFetchProductSuccess(items: List<Product>) {
@@ -94,8 +103,14 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
     }
 
     private fun combineProductData(items: List<Product>): List<Product> {
-        _cartList.value?.forEach { cartItem ->
-            items.find { it.name == cartItem.name }?.updateQty(cartItem.qty)
+        if (_cartList.value!!.isEmpty()) {
+            items.forEach { it ->
+                it.updateQty(0)
+            }
+        } else {
+            _cartList.value?.forEach { cartItem ->
+                items.find { it.name == cartItem.name }?.updateQty(cartItem.qty)
+            }
         }
         return items
     }
