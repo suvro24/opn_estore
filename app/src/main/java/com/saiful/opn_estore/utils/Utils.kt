@@ -10,8 +10,7 @@ import retrofit2.Response
 suspend inline fun <T> handleApiResponse(response: Response<T>): Either<Failure, T> {
     return withContext(Dispatchers.IO) {
         try {
-            if (response.isSuccessful && response.body() != null) {
-
+            if (response.isSuccessful) {
                 Either.Success(response.body()!!)
             } else {
 

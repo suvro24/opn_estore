@@ -42,6 +42,7 @@ class OrderSummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUI()
+        viewModel.fetchCart()
     }
 
     private fun setUpUI() {
@@ -55,7 +56,7 @@ class OrderSummaryFragment : Fragment() {
         })
 
         viewModel.navigationEvent.observe(viewLifecycleOwner, EventObserver {
-            navigateTo(OrderSummaryFragmentDirections.actionOrderSummaryScreenToOrderSuccessScreen())
+            navigateTo(OrderSummaryFragmentDirections.actionOrderSummaryScreenToOrderSuccessScreen(viewModel.address.value!!))
         })
 
         binding.dismissButton.setOnClickListener {

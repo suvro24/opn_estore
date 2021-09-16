@@ -32,7 +32,6 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
             lifecycleOwner = this@StoreFragment.viewLifecycleOwner
             vm = viewModel
         }
-
         return binding.root
     }
 
@@ -45,6 +44,17 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
     private fun setUpUI() {
         val adapter = ParentListAdapter(this)
         binding.parentList.adapter = adapter
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            println("isLOADING: $it")
+            if(it){
+                binding.progressBar.visibility = View.VISIBLE
+                binding.scrollView.visibility = View.GONE
+            }else{
+                binding.progressBar.visibility = View.GONE
+                binding.scrollView.visibility = View.VISIBLE
+            }
+        }
         binding.goToOrder.setOnClickListener {
             navigateTo(StoreFragmentDirections.actionStoreScreenToOrderSummaryScreen())
         }

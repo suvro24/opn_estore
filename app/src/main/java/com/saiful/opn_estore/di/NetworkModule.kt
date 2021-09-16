@@ -1,5 +1,6 @@
 package com.saiful.opn_estore.di
 
+import com.google.gson.GsonBuilder
 import com.saiful.opn_estore.api.SwaggerAPIService
 import dagger.Module
 import dagger.Provides
@@ -30,7 +31,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()))
             .build()
             .create(SwaggerAPIService::class.java)
     }

@@ -25,7 +25,7 @@ buildscript {
         lifecycleVersion = '2.3.1'
         materialVersion = '1.4.0'
         navigationVersion = '2.4.0-alpha08'
-        okhttpLoggingVersion = '4.7.2'
+        okhttpLoggingVersion = '4.9.0'
         pagingVersion = '3.1.0-alpha03'
         recyclerViewVersion = '1.2.1'
         retrofitVersion = '2.9.0'

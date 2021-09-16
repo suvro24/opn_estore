@@ -1,5 +1,14 @@
 package com.saiful.opn_estore.data.model
 
+import com.google.gson.annotations.Expose
+
 data class Store(
-    val name: String, val rating: Number, val openingTime: String, val closingTime: String
+    @Expose
+    val name: String,
+    @Expose
+    val rating: Number,
+    @Expose
+    val openingTime: String,
+    @Expose
+    val closingTime: String
 )

@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/padding_medium"
                     android:layout_marginTop="@dimen/padding_medium"
-                    android:onClickListener="@{()->vm.placeOrder()}"
+                    android:onClickListener="@{()->vm.confirmOrder()}"
                     android:text="@string/place_order" />
 
             </LinearLayout>

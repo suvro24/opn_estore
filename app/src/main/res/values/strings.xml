@@ -18,4 +18,9 @@
     <string name="error_enter_address">Please enter your address</string>
 
     <string name="empty_cart">No product in your cart</string>
+    <string name="loading_text_1">Loading</string>
+    <string name="loading_text_2">Placing your order</string>
+
+    <string name="order_success">Order Success</string>
+    <string name="order_failed">Order Failed</string>
 </resources>

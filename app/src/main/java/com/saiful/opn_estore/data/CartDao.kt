@@ -11,9 +11,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CartDao {
 
-    @Query("SELECT * FROM carts WHERE qty>0")
-    fun getAllProduct(): Flow<List<Product>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addProduct(product: Product)
+
+    @Query("SELECT * FROM carts WHERE qty>0")
+    suspend fun getAllProductList(): List<Product>
+
+    @Query("DELETE FROM carts")
+    suspend fun deleteAll()
 }
