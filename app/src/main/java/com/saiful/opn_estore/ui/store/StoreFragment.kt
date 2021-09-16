@@ -20,7 +20,6 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
     private val viewModel: StoreViewModel by viewModels()
 
     private lateinit var binding: FragmentStoreBinding
-    //private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,

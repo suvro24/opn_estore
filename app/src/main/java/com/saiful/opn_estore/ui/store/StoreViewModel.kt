@@ -1,7 +1,5 @@
 package com.saiful.opn_estore.ui.store
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.saiful.opn_estore.data.DefaultRepository
 import com.saiful.opn_estore.data.Failure
@@ -10,7 +8,6 @@ import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.data.model.Store
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.internal.toImmutableList
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,11 +48,20 @@ class StoreViewModel @Inject constructor(private val repository: DefaultReposito
     fun addItem(item: Product) {
         _productList.value?.find { it.name == item.name }?.addQty()
         _productList.value = _productList.value?.toList()
+        viewModelScope.launch {
+            repository.addProductToCart(item)
+        }
+
+
     }
 
     fun removeItem(item: Product) {
         _productList.value?.find { it.name == item.name }?.removeQty()
         _productList.value = _productList.value?.toList()
+
+        viewModelScope.launch {
+            repository.removeProductFromCart(item)
+        }
     }
 
     private fun onFetchStoreSuccess(store: Store) {
