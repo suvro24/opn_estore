@@ -14,102 +14,79 @@ import com.saiful.opn_estore.databinding.ListItemProductBinding
 import com.saiful.opn_estore.databinding.ListItemStoreBinding
 
 class ParentListAdapter(private val addRemoveItemListener: OnAddRemoveProductClickListener) :
-    ListAdapter<ParentListItemModel, RecyclerView.ViewHolder>(DiffCallback()) {
+    ListAdapter<Product, ParentListAdapter.ProductViewHolder>(DiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            R.layout.list_item_store -> ParentViewHolder.StoreViewHolder(
-                ListItemStoreBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        return ProductViewHolder(
+            ListItemProductBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
             )
-
-            R.layout.list_item_product -> ParentViewHolder.ProductViewHolder(
-                ListItemProductBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
-            )
-
-            else -> throw IllegalArgumentException("Invalid ViewHolder Type $viewType")
-        }
+        )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        holder.bind(
+            getItem(position) as Product,
+            addRemoveItemListener
+        )
 
-            is ParentViewHolder.StoreViewHolder -> holder.bind(getItem(position) as Store)
-
-            is ParentViewHolder.ProductViewHolder -> holder.bind(getItem(position) as Product, addRemoveItemListener)
-        }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
-            is Store -> R.layout.list_item_store
-            is Product -> R.layout.list_item_product
-            else -> throw IllegalArgumentException("Invalid View Type")
-        }
-    }
-
-
-    sealed class ParentViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        class StoreViewHolder(private val binding: ListItemStoreBinding) :
-            ParentViewHolder(binding) {
-
-            fun bind(item: Store) {
-                binding.apply {
-                    store = item
-                    executePendingBindings()
-                }
+    class ProductViewHolder(private val binding: ListItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Product, addRemoveItemListener: OnAddRemoveProductClickListener) {
+            binding.apply {
+                product = item
+                addRemoveListener = addRemoveItemListener
+                executePendingBindings()
             }
         }
-
-        class ProductViewHolder(private val binding: ListItemProductBinding) :
-            ParentViewHolder(binding) {
-            fun bind(item: Product, addRemoveItemListener: OnAddRemoveProductClickListener) {
-                binding.apply {
-                    product = item
-                    addRemoveListener = addRemoveItemListener
-                    executePendingBindings()
-                }
-            }
-        }
-
     }
 
-    interface OnAddRemoveProductClickListener{
+
+    interface OnAddRemoveProductClickListener {
         fun onAddProduct(item: Product)
         fun onRemoveProduct(item: Product)
     }
-}
+
+    private class DiffCallback : DiffUtil.ItemCallback<Product>() {
+
+        override fun areItemsTheSame(
+            oldItem: Product,
+            newItem: Product
+        ): Boolean {
+            return oldItem == newItem
 
 
-private class DiffCallback : DiffUtil.ItemCallback<ParentListItemModel>() {
-
-    override fun areItemsTheSame(
-        oldItem: ParentListItemModel,
-        newItem: ParentListItemModel
-    ): Boolean {
-        return when {
-            oldItem is Store && newItem is Store -> oldItem == newItem
-
-            oldItem is Product && newItem is Product -> oldItem == newItem
-
-            else -> false
         }
-    }
 
-    override fun areContentsTheSame(
-        oldItem: ParentListItemModel,
-        newItem: ParentListItemModel
-    ): Boolean {
-        return when {
-            oldItem is Store && newItem is Store -> oldItem == newItem
+        override fun areContentsTheSame(
+            oldItem: Product,
+            newItem: Product
+        ): Boolean {
 
-            oldItem is Product && newItem is Product -> oldItem == newItem
-
-            else -> false
+            return oldItem == newItem
         }
     }
 }
+
+
+//class DiffCallback : DiffUtil.ItemCallback<Product>() {
+//
+//    override fun areItemsTheSame(
+//        oldItem: Product,
+//        newItem: Product
+//    ): Boolean {
+//        return oldItem == newItem
+//
+//
+//    }
+//
+//    override fun areContentsTheSame(
+//        oldItem: Product,
+//        newItem: Product
+//    ): Boolean {
+//
+//        return oldItem == newItem
+//    }
+//}

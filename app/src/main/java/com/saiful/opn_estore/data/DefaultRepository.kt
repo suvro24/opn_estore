@@ -1,10 +1,12 @@
 package com.saiful.opn_estore.data
 
 
+import androidx.lifecycle.LiveData
 import com.saiful.opn_estore.api.SwaggerAPIService
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.utils.handleApiResponse
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,7 +27,7 @@ class DefaultRepository @Inject constructor(private val apiService:SwaggerAPISer
     suspend fun removeProductFromCart(product: Product){
         cartDao.addProduct(product)
     }
-    suspend fun getAllProductFromCart():List<Product>{
+    fun getAllProductFromCart():Flow<List<Product>>{
         return cartDao.getAllProduct()
     }
 }
