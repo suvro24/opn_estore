@@ -17,8 +17,7 @@ class OrderSuccessFragment : Fragment() {
 
     private val viewModel: OrderSuccessViewModel by viewModels()
 
-    private var _binding: FragmentOrderSuccessBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentOrderSuccessBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +25,7 @@ class OrderSuccessFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentOrderSuccessBinding.inflate(inflater, container, false)
+        binding = FragmentOrderSuccessBinding.inflate(inflater, container, false)
 
         binding.buttonDismiss.setOnClickListener {
             it.findNavController().navigate(OrderSuccessFragmentDirections.actionOrderSuccessScreenToStoreScreen())

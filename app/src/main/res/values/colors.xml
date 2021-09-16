@@ -18,4 +18,5 @@
 
     <color name="product_card_text">#280680</color>
     <color name="product_card_sub_text">#232222</color>
+    <color name="empty_cart">#280680</color>
 </resources>

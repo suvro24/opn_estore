@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.saiful.opn_estore.adapter.ParentListAdapter
@@ -45,7 +46,7 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
         val adapter = ParentListAdapter(this)
         binding.parentList.adapter = adapter
         binding.goToOrder.setOnClickListener {
-            findNavController().navigate(StoreFragmentDirections.actionStoreScreenToOrderSummaryScreen())
+            navigateTo(StoreFragmentDirections.actionStoreScreenToOrderSummaryScreen())
         }
     }
 
@@ -55,5 +56,9 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
 
     override fun onRemoveProduct(item: Product) {
         viewModel.removeItem(item)
+    }
+
+    private fun navigateTo(action: NavDirections) {
+        findNavController().navigate(action)
     }
 }

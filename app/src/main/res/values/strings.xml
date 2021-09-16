@@ -4,7 +4,9 @@
     <string name="title_order_summary">Order Summary</string>
     <string name="title_order_success">Order Success</string>
 
+    <string name="place_order">Confirm order</string>
     <string name="btn_add_text">ADD</string>
+    <string name="btn_dismiss_text">Dismiss</string>
     <string name="store_label">Stores</string>
     <string name="product_label">Products</string>
     <string name="store_open_time">Opening time: %1$s</string>
@@ -12,4 +14,8 @@
     <string name="product_price">฿%1$d</string>
     <string name="cart_product_qty">Quantity: x%1$d</string>
     <string name="cart_total_price">Total price: ฿%1$d</string>
+    <string name="enter_address">Enter address here</string>
+    <string name="error_enter_address">Please enter your address</string>
+
+    <string name="empty_cart">No product in your cart</string>
 </resources>

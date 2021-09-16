@@ -5,16 +5,11 @@
     android:id="@+id/nav_graph"
     app:startDestination="@+id/storeScreen">
 
-<!--    <include app:graph="@navigation/store_navigation"/>-->
-<!--    <include app:graph="@navigation/order_summary_navigation"/>-->
-
-
     <fragment
         android:id="@+id/storeScreen"
         android:name="com.saiful.opn_estore.ui.store.StoreFragment"
         android:label="@string/title_store"
-        tools:layout="@layout/fragment_store"
-        >
+        tools:layout="@layout/fragment_store">
         <action
             android:id="@+id/action_storeScreen_to_orderSummaryScreen"
             app:destination="@id/orderSummaryScreen"
@@ -29,11 +24,14 @@
         android:id="@+id/orderSummaryScreen"
         android:name="com.saiful.opn_estore.ui.order_summary.OrderSummaryFragment"
         android:label="@string/title_order_summary"
-        tools:layout="@layout/fragment_order_summary"
-        >
+        tools:layout="@layout/fragment_order_summary">
         <action
             android:id="@+id/action_orderSummaryScreen_to_orderSuccessScreen"
-            app:destination="@id/orderSuccessScreen" />
+            app:destination="@id/orderSuccessScreen"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
@@ -41,13 +39,16 @@
         android:id="@+id/orderSuccessScreen"
         android:name="com.saiful.opn_estore.ui.order_success.OrderSuccessFragment"
         android:label="@string/title_order_success"
-        tools:layout="@layout/fragment_order_success"
-        >
+        tools:layout="@layout/fragment_order_success">
         <action
             android:id="@+id/action_orderSuccessScreen_to_storeScreen"
             app:destination="@id/storeScreen"
             app:popUpTo="@+id/storeScreen"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 

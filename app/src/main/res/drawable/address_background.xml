@@ -6,11 +6,13 @@
     <solid
         android:color="#BEEDE7F6"/>
 
-    <!-- Control the radius of each corners -->
 
-    <stroke android:width="2dp"
-        android:color="@color/color_primary"
-        />
+    <!-- Control the width and height of the shape -->
+    <size
+        android:width="200dp"
+        android:height="70dp"/>
+
+    <!-- Control the radius of each corners -->
     <corners
         android:radius="4dp" />
 </shape>
