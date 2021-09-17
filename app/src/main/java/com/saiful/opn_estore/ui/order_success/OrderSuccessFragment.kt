@@ -43,14 +43,19 @@ class OrderSuccessFragment : Fragment() {
     private fun setUpUI() {
         viewModel.successEvent.observe(viewLifecycleOwner, EventObserver{
             binding.placeOrderTxt.text = getText(R.string.order_success)
+
             binding.placeOrderTxt.visibility = View.VISIBLE
-            binding.dismissButton.visibility = View.GONE
+            binding.placeOrderImg.setImageResource(R.drawable.bg_success)
+            binding.placeOrderImg.visibility = View.VISIBLE
+            binding.dismissButton.visibility = View.VISIBLE
         })
 
         viewModel.errorEvent.observe(viewLifecycleOwner, EventObserver{
             binding.placeOrderTxt.text = getText(R.string.order_failed)
             binding.placeOrderTxt.visibility = View.VISIBLE
-            binding.dismissButton.visibility = View.GONE
+            binding.placeOrderImg.setImageResource(R.drawable.bg_failed)
+            binding.placeOrderImg.visibility = View.VISIBLE
+            binding.dismissButton.visibility = View.VISIBLE
         })
 
         binding.dismissButton.setOnClickListener {
