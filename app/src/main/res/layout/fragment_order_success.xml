@@ -51,12 +51,12 @@
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="@color/empty_cart"
-            android:visibility="@{vm.isLoading?View.GONE:View.VISIBLE}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Place order failed" />
+            tools:text="Place order failed"/>
 
         <ImageView
             android:id="@+id/place_order_img"
@@ -65,7 +65,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/place_order_txt"
-            android:src="@drawable/bg_success"/>
+            android:src="@drawable/bg_success"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/dismiss_button"
@@ -76,7 +77,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/place_order_txt"
-            tools:visibility="gone" />
+            tools:visibility="gone"
+            android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
