@@ -1,6 +1,6 @@
 
 
-package com.saiful.opn_estore
+package com.saiful.opn_estore.utils
 
 import android.content.ComponentName
 import android.content.Intent
@@ -10,6 +10,8 @@ import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.saiful.opn_estore.HiltTestActivity
+import com.saiful.opn_estore.R
 
 
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(

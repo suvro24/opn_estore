@@ -72,8 +72,6 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
         viewModelScope.launch {
             repository.updateProduct(item)
         }
-
-
     }
 
     fun removeItem(item: Product) {
@@ -86,7 +84,7 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
     }
 
     private fun onFetchStoreSuccess(store: Store) {
-        _storeInfo.value = store
+        setStore(store)
     }
 
     private fun onFetchStoreFailed(failure: Failure) {
@@ -94,7 +92,7 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
     }
 
     private fun onFetchProductSuccess(items: List<Product>) {
-        _productList.value = combineProductData(items)
+        setProducts(items)
 
     }
 
@@ -113,6 +111,14 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
             }
         }
         return items
+    }
+
+    fun setStore(store:Store){
+        _storeInfo.value = store
+    }
+
+    fun setProducts(products: List<Product>){
+        _productList.value = products.toList()
     }
 
 }

@@ -1,4 +1,4 @@
-package com.saiful.opn_estore
+package com.saiful.opn_estore.utils
 
 import android.app.Application
 import android.content.Context

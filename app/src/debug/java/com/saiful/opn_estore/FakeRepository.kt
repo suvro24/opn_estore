@@ -1,4 +1,4 @@
-package com.saiful.opn_estore.utils
+package com.saiful.opn_estore
 
 import com.saiful.opn_estore.data.Either
 import com.saiful.opn_estore.data.Failure
@@ -8,28 +8,33 @@ import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.repository.Repository
 
 class FakeRepository :Repository {
+
+    val fakeAPI = FakeAPI()
+
     override suspend fun getStores(): Either<Failure, Store> {
-        return Either.Success(Store("Coffee Store", 4.5, "10:00", "20:00"))
+        return fakeAPI.getStores()
     }
 
     override suspend fun getProducts(): Either<Failure, List<Product>> {
-        TODO("Not yet implemented")
+        return fakeAPI.getProducts()
 
     }
 
     override suspend fun submitOrder(data: OrderRequestBody): Either<Failure, Unit> {
-        TODO("Not yet implemented")
+        return fakeAPI.submitOrder(data)
     }
 
+
     override suspend fun updateProduct(product: Product) {
-        TODO("Not yet implemented")
+        //Fake update product for DB can be empty for easy testing
     }
 
     override suspend fun clearAllProductFromCart() {
-        TODO("Not yet implemented")
+
+        //Fake deleteAll product for DB can be empty for easy testing
     }
 
     override suspend fun getAllCart(): List<Product> {
-        TODO("Not yet implemented")
+        return fakeAPI.getAllCart()
     }
 }

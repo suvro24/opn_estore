@@ -30,7 +30,6 @@ class OrderSuccessViewModel @Inject constructor(private val repository: Reposito
     fun placeOrder(address: String) {
         _isLoading.value = true
         viewModelScope.launch {
-
             try {
                 val cartList = repository.getAllCart()
                 repository.submitOrder(OrderRequestBody(cartList, address))
