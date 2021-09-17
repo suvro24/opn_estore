@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.saiful.opn_estore.data.Failure
+import com.saiful.opn_estore.utils.Failure
 import com.saiful.opn_estore.data.model.OrderRequestBody
 import com.saiful.opn_estore.repository.Repository
 import com.saiful.opn_estore.utils.Event

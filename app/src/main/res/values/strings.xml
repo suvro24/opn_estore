@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OPN eSTORE</string>
+    <string name="app_name">eStore(OPN)</string>
     <string name="title_store">eStore</string>
     <string name="title_order_summary">Order Summary</string>
     <string name="title_order_success">Order Success</string>

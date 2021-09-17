@@ -169,7 +169,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:setItems="@{vm.productList}"
                     app:spanCount="2"
-                    tools:listitem="@layout/list_item_store" />
+                    tools:listitem="@layout/list_item_product" />
 
                 <Button
                     android:id="@+id/go_to_order"

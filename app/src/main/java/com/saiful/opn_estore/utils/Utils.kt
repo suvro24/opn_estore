@@ -1,7 +1,5 @@
 package com.saiful.opn_estore.utils
 
-import com.saiful.opn_estore.data.Either
-import com.saiful.opn_estore.data.Failure
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
