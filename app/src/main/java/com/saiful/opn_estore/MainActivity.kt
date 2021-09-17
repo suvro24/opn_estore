@@ -32,10 +32,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
-        //Setting bottom navigation with navController
-//        val bottomNavigationView: BottomNavigationView = binding.navView
-//        bottomNavigationView.setupWithNavController(navController)
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.storeScreen,
@@ -47,10 +43,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
     }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp(appBarConfiguration) ||
-//                super.onSupportNavigateUp()
-//    }
 
 }

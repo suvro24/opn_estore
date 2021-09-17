@@ -12,11 +12,13 @@ android {
     defaultConfig {
         applicationId "com.saiful.opn_estore"
         minSdk 21
-        targetSdk 31
+        targetSdk 30
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "com.saiful.opn_estore.CustomTestRunner"
     }
 
     buildTypes {
@@ -24,6 +26,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -72,21 +78,27 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
     implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
-
-
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
 
     // Testing dependencies
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion"
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
-    androidTestImplementation "androidx.work:work-testing:$rootProject.workVersion"
+    androidTestImplementation 'androidx.test.ext:truth:1.4.0'
     androidTestImplementation "com.google.truth:truth:$rootProject.truthVersion"
+    androidTestImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation "android.arch.core:core-testing:1.1.1"
     androidTestImplementation "com.google.dagger:hilt-android-testing:$rootProject.hiltVersion"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation 'org.mockito:mockito-core:3.3.1'
+    testImplementation 'org.mockito:mockito-core:3.3.1'
 }
