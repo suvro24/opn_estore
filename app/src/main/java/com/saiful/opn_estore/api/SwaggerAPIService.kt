@@ -3,7 +3,6 @@ package com.saiful.opn_estore.api
 import com.saiful.opn_estore.data.model.OrderRequestBody
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.data.model.Store
-import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

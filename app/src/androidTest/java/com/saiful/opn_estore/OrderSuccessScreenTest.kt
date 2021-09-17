@@ -1,23 +1,23 @@
 package com.saiful.opn_estore
 
 import android.os.Bundle
-import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import com.saiful.opn_estore.databinding.FragmentStoreBinding
-import com.saiful.opn_estore.ui.store.StoreFragment
+import com.saiful.opn_estore.ui.order_success.OrderSuccessFragment
+import com.saiful.opn_estore.ui.order_success.OrderSuccessFragmentDirections
 import com.saiful.opn_estore.utils.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
-class StoreScreenTest {
+class OrderSuccessScreenTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -33,23 +33,28 @@ class StoreScreenTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
-    @Test
-    fun testNavigationToOrderSummaryScreen() {
-        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
-        var binding:FragmentStoreBinding? = null
-        launchFragmentInHiltContainer<StoreFragment>(Bundle(), R.style.AppTheme) {
-            navController.setGraph(R.navigation.nav_graph)
-            navController.setCurrentDestination(R.id.storeScreen)
-            Navigation.setViewNavController(requireView(), navController)
-
-            binding = DataBindingUtil.findBinding(this.view!!)
-        }
-
-        binding!!.goToOrder.visibility = View.VISIBLE
-
-        onView(withId(R.id.go_to_order)).perform(click())
-        assertThat(navController.currentDestination?.id).isEqualTo(R.id.orderSummaryScreen)
-
+    @Before
+    fun setUp(){
+        Dispatchers.setMain(Dispatchers.IO)
     }
 
+    @After
+    fun tearDown(){
+        Dispatchers.resetMain()
+    }
+    
+    @Test
+    fun testNavigationToStoreScreen() {
+
+        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
+        launchFragmentInHiltContainer<OrderSuccessFragment>(Bundle(), R.style.AppTheme) {
+            navController.setGraph(R.navigation.nav_graph)
+            navController.setCurrentDestination(R.id.orderSuccessScreen)
+            Navigation.setViewNavController(requireView(), navController)
+
+            (this as OrderSuccessFragment).navigateTo(OrderSuccessFragmentDirections.actionOrderSuccessScreenToStoreScreen())
+        }
+        assertThat(navController.currentDestination?.id).isEqualTo(R.id.storeScreen)
+
+    }
 }

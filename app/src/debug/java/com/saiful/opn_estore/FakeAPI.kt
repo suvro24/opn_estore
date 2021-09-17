@@ -1,12 +1,10 @@
 package com.saiful.opn_estore
 
-import com.saiful.opn_estore.data.DefaultRepository
-import com.saiful.opn_estore.data.Either
-import com.saiful.opn_estore.data.Failure
+import com.saiful.opn_estore.utils.Either
+import com.saiful.opn_estore.utils.Failure
 import com.saiful.opn_estore.data.model.OrderRequestBody
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.data.model.Store
-import com.saiful.opn_estore.repository.Repository
 
 class FakeAPI {
     var setSuccessResponse = true

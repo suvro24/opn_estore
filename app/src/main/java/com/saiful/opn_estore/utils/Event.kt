@@ -2,9 +2,6 @@ package com.saiful.opn_estore.utils
 
 import androidx.lifecycle.Observer
 
-/**
- * Event for navigation changes
- */
 open class Event<out T>(private val content: T) {
 
     @Suppress("MemberVisibilityCanBePrivate")

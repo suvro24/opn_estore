@@ -4,19 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.saiful.opn_estore.R
 import com.saiful.opn_estore.adapter.ParentListAdapter
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.databinding.FragmentStoreBinding
-import com.saiful.opn_estore.ui.order_summary.OrderSummaryFragmentDirections
 import com.saiful.opn_estore.utils.EventObserver
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,12 +32,14 @@ class StoreFragment : Fragment(), ParentListAdapter.OnAddRemoveProductClickListe
             vm = viewModel
         }
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUI()
         viewModel.fetchStoreAndProduct()
+
     }
 
     private fun setUpUI() {

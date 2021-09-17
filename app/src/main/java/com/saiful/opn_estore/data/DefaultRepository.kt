@@ -1,14 +1,13 @@
 package com.saiful.opn_estore.data
 
-import androidx.lifecycle.LiveData
 import com.saiful.opn_estore.api.SwaggerAPIService
 import com.saiful.opn_estore.data.model.OrderRequestBody
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.repository.Repository
+import com.saiful.opn_estore.utils.Either
+import com.saiful.opn_estore.utils.Failure
 import com.saiful.opn_estore.utils.handleApiResponse
-import kotlinx.coroutines.flow.Flow
-import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -1,15 +1,12 @@
 package com.saiful.opn_estore.adapter
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.saiful.opn_estore.data.model.ParentListItemModel
 import com.saiful.opn_estore.data.model.Product
-import com.saiful.opn_estore.data.model.Store
 
 @BindingAdapter("app:setItems")
 fun setItems(recyclerView: RecyclerView, items: List<Product>?) {

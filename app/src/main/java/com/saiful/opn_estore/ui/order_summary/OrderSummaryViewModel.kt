@@ -1,14 +1,13 @@
 package com.saiful.opn_estore.ui.order_summary
 
-import androidx.lifecycle.*
-import com.saiful.opn_estore.R
-import com.saiful.opn_estore.data.DefaultRepository
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.repository.Repository
 import com.saiful.opn_estore.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.switchMap
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

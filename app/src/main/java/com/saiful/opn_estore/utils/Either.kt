@@ -1,4 +1,5 @@
-package com.saiful.opn_estore.data
+package com.saiful.opn_estore.utils
+
 
 sealed class Either<out L, out R> {
     data class Error<out L>(val failure: L) : Either<L, Nothing>()

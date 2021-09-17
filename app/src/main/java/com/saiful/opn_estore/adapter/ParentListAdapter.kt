@@ -5,13 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
-import com.saiful.opn_estore.R
-import com.saiful.opn_estore.data.model.ParentListItemModel
 import com.saiful.opn_estore.data.model.Product
-import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.databinding.ListItemProductBinding
-import com.saiful.opn_estore.databinding.ListItemStoreBinding
 
 class ParentListAdapter(private val addRemoveItemListener: OnAddRemoveProductClickListener) :
     ListAdapter<Product, ParentListAdapter.ProductViewHolder>(DiffCallback()) {

@@ -1,17 +1,15 @@
 package com.saiful.opn_estore.ui.order_success
 
-import androidx.lifecycle.*
-import com.saiful.opn_estore.data.DefaultRepository
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.saiful.opn_estore.data.Failure
 import com.saiful.opn_estore.data.model.OrderRequestBody
-import com.saiful.opn_estore.data.model.Product
-import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.repository.Repository
 import com.saiful.opn_estore.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel

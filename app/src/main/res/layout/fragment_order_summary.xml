@@ -18,6 +18,30 @@
         android:layout_height="match_parent"
         tools:context=".ui.store.StoreFragment">
 
+        <TextView
+            android:id="@+id/empty_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_cart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            tools:text="Dismiss"
+            android:visibility="@{vm.cartProductList.size()>0? View.GONE: View.VISIBLE}"/>
+
+        <Button
+            android:id="@+id/dismiss_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/empty_cart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:text="@string/btn_dismiss_text"
+            android:visibility="@{vm.cartProductList.size()>0? View.GONE: View.VISIBLE}"/>
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
@@ -89,29 +113,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/empty_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/empty_cart"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            tools:text="Dismiss"
-            android:visibility="@{vm.cartProductList.size()>0? View.GONE: View.VISIBLE}"/>
-
-        <Button
-            android:id="@+id/dismiss_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/empty_cart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/padding_medium"
-            android:text="@string/btn_dismiss_text"
-            android:visibility="@{vm.cartProductList.size()>0? View.GONE: View.VISIBLE}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

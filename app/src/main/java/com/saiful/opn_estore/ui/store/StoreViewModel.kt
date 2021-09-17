@@ -1,19 +1,16 @@
 package com.saiful.opn_estore.ui.store
 
-import android.util.Log
-import androidx.lifecycle.*
-import com.saiful.opn_estore.R
-import com.saiful.opn_estore.data.DefaultRepository
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.saiful.opn_estore.data.Failure
 import com.saiful.opn_estore.data.model.Product
 import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.repository.Repository
 import com.saiful.opn_estore.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -84,7 +81,8 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
     }
 
     private fun onFetchStoreSuccess(store: Store) {
-        setStore(store)
+        _storeInfo.value =store
+        //setStore(store)
     }
 
     private fun onFetchStoreFailed(failure: Failure) {
@@ -92,7 +90,7 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
     }
 
     private fun onFetchProductSuccess(items: List<Product>) {
-        setProducts(items)
+        _productList.value = combineProductData(items)
 
     }
 
@@ -111,10 +109,6 @@ class StoreViewModel @Inject constructor(private val repository: Repository) : V
             }
         }
         return items
-    }
-
-    fun setStore(store:Store){
-        _storeInfo.value = store
     }
 
     fun setProducts(products: List<Product>){

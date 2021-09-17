@@ -2,7 +2,6 @@ package com.saiful.opn_estore
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.saiful.opn_estore.data.model.Product
-import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.ui.store.StoreViewModel
 import com.saiful.opn_estore.utils.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +39,7 @@ class StoreScreenViewModelTest {
 
     @Test
     fun checkFetchStoreProductsSuccess() {
+        fakeRepository.fakeAPI.setSuccessResponse = true
         runBlocking {
             storeViewModel.fetchStoreAndProduct()
         }
@@ -71,17 +71,46 @@ class StoreScreenViewModelTest {
 
     @Test
     fun storeIsNull() {
-        storeViewModel.setStore(Store("Coffee Store", 4.5, "10:00", "20:00"))
-        Assert.assertNotNull(storeViewModel.storeInfo.getOrAwaitValue())
+        fakeRepository.fakeAPI.setSuccessResponse = false
+        val bool = try {
+            runBlocking {
+                storeViewModel.fetchStoreAndProduct()
+            }
+            storeViewModel.storeInfo.getOrAwaitValue()
+            false
+        } catch (e: Exception) {
+            true
+        }
+        Assert.assertTrue(bool)
+
+    }
+
+    @Test
+    fun storeIsNotNull() {
+        fakeRepository.fakeAPI.setSuccessResponse = true
+        val bool = try {
+            runBlocking {
+                storeViewModel.fetchStoreAndProduct()
+            }
+            storeViewModel.storeInfo.getOrAwaitValue()
+            true
+        } catch (e: Exception) {
+            false
+        }
+        Assert.assertTrue(bool)
 
     }
 
 
     @Test
     fun storeExpectedValue() {
-        storeViewModel.setStore(Store("Coffee Store", 4.5, "10:00", "20:00"))
-        Assert.assertEquals(storeViewModel.storeInfo.getOrAwaitValue().name, "Coffee Store")
-        Assert.assertNotEquals(storeViewModel.storeInfo.getOrAwaitValue().name, "Tea Store")
+        fakeRepository.fakeAPI.setSuccessResponse = true
+        runBlocking {
+            storeViewModel.fetchStoreAndProduct()
+        }
+
+        Assert.assertNotEquals(storeViewModel.storeInfo.getOrAwaitValue().name, "Coffee Store")
+        Assert.assertEquals(storeViewModel.storeInfo.getOrAwaitValue().name, "Tea shop")
 
     }
 

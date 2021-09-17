@@ -1,12 +1,7 @@
 package com.saiful.opn_estore
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.saiful.opn_estore.data.model.OrderRequestBody
-import com.saiful.opn_estore.data.model.Product
-import com.saiful.opn_estore.data.model.Store
 import com.saiful.opn_estore.ui.order_success.OrderSuccessViewModel
-import com.saiful.opn_estore.ui.order_summary.OrderSummaryViewModel
-import com.saiful.opn_estore.ui.store.StoreViewModel
 import com.saiful.opn_estore.utils.getOrAwaitValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
